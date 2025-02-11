@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${entity.id == null ? 'Создать новую Entity' : 'Редактировать Entity'}">Entity Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        label { display: block; margin-bottom: 8px; }
+        input, textarea, button { margin-bottom: 15px; padding: 8px; width: 100%; }
+        button { width: auto; }
+        .form-container { max-width: 600px; margin: 0 auto; }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h1 th:text="${entity.id == null ? 'Создать новую Entity' : 'Редактировать Entity'}"></h1>
+    <form th:action="@{${entity.id} == null ? '/entities' : '/entities/' + ${entity.id}}" th:object="${entity}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <label for="name">Name:</label>
+        <input type="text" th:field="*{name}" id="name" required placeholder="Введите имя" />
+
+        <label for="description">Description:</label>
+        <textarea th:field="*{description}" id="description" required placeholder="Введите описание"></textarea>
+
+        <button type="submit">Сохранить</button>
+    </form>
+    <a href="/entities">Назад к списку Entities</a>
+</div>
+</body>
+</html>
